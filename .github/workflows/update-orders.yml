@@ -1,0 +1,20 @@
+name: Update Orders on GitHub
+
+on:  
+  push:
+    branches:
+      - main  # Run this action when code is pushed to the main branch
+
+jobs:
+  update-orders:
+    runs-on: ubuntu-latest  # Use Ubuntu as the environment
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Get the latest code from the repo
+
+      - name: Run Script with Secret
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # Load the secret token
+        run: |
+          echo "GitHub Token is available and ready to use"
