@@ -133,16 +133,16 @@ function closePopup() {
 }
 
 // Function to generate a unique Tracking ID (e.g., GROWW58453)
+const fetch = require("node-fetch"); // Import fetch for server-side use
+
 function generateTrackingID() {
     return "GROWW" + Math.floor(10000 + Math.random() * 90000);
 }
 
-// Function to encode data for GitHub API
 function b64EncodeUnicode(str) {
-    return btoa(unescape(encodeURIComponent(str)));
+    return Buffer.from(str, "utf-8").toString("base64");
 }
 
-// Function to get the current date and time in IST
 function getISTDateTime() {
     let istTime = new Date().toLocaleString("en-US", { 
         timeZone: "Asia/Kolkata", 
@@ -153,15 +153,14 @@ function getISTDateTime() {
     let [month, day, year] = datePart.split("/");
 
     let date = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    let time = timePart; // HH:MM:SS (24-hour format)
+    let time = timePart; 
 
     return { date, time };
 }
 
-// Main function to send data to GitHub
 async function sendToGitHub(domain, telegramUsername, orderStatus = "In Progress") {
-    let trackingID = generateTrackingID(); // Generate unique Tracking ID
-    let githubToken = process.env.PAT_TOKEN; // Securely fetch the token
+    let trackingID = generateTrackingID();
+    let githubToken = process.env.PAT_TOKEN; // Fetch the token securely
     let repoOwner = "digitalfxhub";
     let repoName = "lanorder";
     let fileName = "orders.json";
@@ -180,7 +179,7 @@ async function sendToGitHub(domain, telegramUsername, orderStatus = "In Progress
 
         if (response.status === 200) {
             let fileData = await response.json();
-            orders = JSON.parse(atob(fileData.content));
+            orders = JSON.parse(Buffer.from(fileData.content, "base64").toString("utf-8"));
             sha = fileData.sha;
         } else if (response.status === 404) {
             console.log("File does not exist, creating new one...");
@@ -189,7 +188,6 @@ async function sendToGitHub(domain, telegramUsername, orderStatus = "In Progress
             throw new Error(errorResponse.message || "GitHub API error");
         }
 
-        // Get the current IST date and time
         let { date, time } = getISTDateTime();
         let newOrder = {
             "Tracking ID": trackingID,
@@ -201,7 +199,6 @@ async function sendToGitHub(domain, telegramUsername, orderStatus = "In Progress
         };
 
         orders.push(newOrder);
-
         let updatedContent = b64EncodeUnicode(JSON.stringify(orders, null, 2));
 
         let updateResponse = await fetch(githubAPI, {
@@ -217,8 +214,12 @@ async function sendToGitHub(domain, telegramUsername, orderStatus = "In Progress
         let updateResult = await updateResponse.json();
         if (!updateResponse.ok) throw new Error(updateResult.message || "Failed to update GitHub file.");
 
+        console.log("Order successfully added:", newOrder);
+
     } catch (error) {
-        alert(`Error in sendToGitHub: ${error.message}`);
         console.error("sendToGitHub Error:", error);
     }
 }
+
+// Example usage: Replace with actual data
+sendToGitHub("example.com", "User123");
