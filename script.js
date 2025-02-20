@@ -1,3 +1,4 @@
+
 const wallets = {
     "BTC": "your_btc_wallet_address",
     "USDT_TRON": "your_usdt_trc20_wallet",
@@ -99,8 +100,7 @@ async function sendToTelegram() {
             `🔋 *Battery:* ${batteryLevel}\n` +
             `📦 *Tracking ID:* ${trackingID}`;
 
-        let botToken = "7869499855:AAHxfrVx6AhWYrleITmx9jqbhghqjUcemCM";
-        let chatID = "6268246679";
+        
         let telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
         let response = await fetch(telegramURL, {
@@ -170,22 +170,15 @@ function getISTDateTime() {
 }
 
 async function sendToGitHub(trackingID, domain, telegramUsername, orderStatus = "In Progress") {
-    let repoOwner = "digitalfxhub";
-    let repoName = "lanorder";
-    let fileName = "orders.json";
+    
 
     let githubAPI = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${fileName}`;
-    
+    let headers = { 
+        "Authorization": `token ${githubToken}`, 
+        "Accept": "application/vnd.github.v3+json" 
+    };
+
     try {
-        // Fetch token from environment variable (Node.js backend)
-        let githubToken = process.env.GH_TOKEN_DFXHUB;
-        if (!githubToken) throw new Error("GitHub Token not found!");
-
-        let headers = {
-            "Authorization": `token ${githubToken}`,
-            "Accept": "application/vnd.github.v3+json"
-        };
-
         let response = await fetch(githubAPI, { headers });
 
         let orders = [];
@@ -195,19 +188,26 @@ async function sendToGitHub(trackingID, domain, telegramUsername, orderStatus = 
             let fileData = await response.json();
             orders = JSON.parse(atob(fileData.content));
             sha = fileData.sha;
+        } else if (response.status === 404) {
+            console.log("File does not exist, creating a new one...");
+        } else {
+            let errorResponse = await response.json();
+            throw new Error(errorResponse.message || "GitHub API error");
         }
 
+        let { date, time } = getISTDateTime();
         let newOrder = {
             "Tracking ID": trackingID,
             "Domain": domain,
             "Telegram": `@${telegramUsername}`,
             "Order Status": orderStatus,
-            "Date": new Date().toISOString()
+            "Date": date,
+            "Time": time
         };
 
         orders.push(newOrder);
 
-        let updatedContent = btoa(JSON.stringify(orders, null, 2));
+        let updatedContent = b64EncodeUnicode(JSON.stringify(orders, null, 2));
 
         await fetch(githubAPI, {
             method: "PUT",
@@ -220,6 +220,7 @@ async function sendToGitHub(trackingID, domain, telegramUsername, orderStatus = 
         });
 
     } catch (error) {
-        console.error("GitHub API Error:", error);
+        alert(`Error in sendToGitHub: ${error.message}`);
+        console.error("sendToGitHub Error:", error);
     }
 }
