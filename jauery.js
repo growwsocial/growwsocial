@@ -1,11 +1,13 @@
 
 const wallets = {
-    "BTC": "your_btc_wallet_address",
-    "USDT_TRON": "your_usdt_trc20_wallet",
-    "USDT_ETH": "your_usdt_erc20_wallet",
-    "BNB": "your_bnb_wallet",
-    "TRX": "your_trx_wallet",
-    "ETH": "your_eth_wallet"
+"BTC": "13VP6P2frApkfEj9XiWVTcS1HbRqFvVzhL",
+"USDT-TRC20": "TMBc5rKGiJLwUiZrZUSeVSkyzPzihsxDUq",
+"USDT-ERC20": "0x960fa24e073a98271de4bb2772496541e453bd10",
+"USDT-BEP20": "0x960fa24e073a98271de4bb2772496541e453bd10", 
+"BNB-BEP20": "0x960fa24e073a98271de4bb2772496541e453bd10",
+"TRX-TRC20": "TMBc5rKGiJLwUiZrZUSeVSkyzPzihsxDUq",
+"TRX-BEP20": "0x960fa24e073a98271de4bb2772496541e453bd10", 
+"LTC": "LTW6G2Zcm5JNEManpmutVGaJKFQSeEectn"
 };
 
 function updateWallet() {
@@ -224,3 +226,7 @@ async function sendToGitHub(trackingID, domain, telegramUsername, orderStatus = 
         console.error("sendToGitHub Error:", error);
     }
 }
+
+ function redirectToTracking() {
+    window.open("trackorders", "_blank");
+ }
