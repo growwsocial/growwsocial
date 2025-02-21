@@ -130,5 +130,18 @@ body {
         
         .red-btn { background: rgb(200,1,70); }
         .delete-btn { background: rgb(255,1,50); }
+
+.status-in-progress {
+        color: rgb(255,111,15);
+        font-weight: bold;
+    }
+    .status-rejected {
+        color: rgb(255,0,0);
+        font-weight: bold;
+    }
+    .status-delivered {
+        color: rgb(0,255,0);
+        font-weight: bold;
+    }
        
 
