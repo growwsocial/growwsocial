@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>🔍 Track Your Order</h2>
+    <input type="text" id="trackingInput" placeholder="Enter Tracking ID">
+    <button onclick="trackOrder()">Track</button>
+    <!-- Search Results -->
+    <div id="orderResult"></div>
+
+    <!-- Notice Button -->
+    <button class="notice-btn" onclick="openNoticePopup()">📢</button>
+
+    <!-- Overlay & Popups -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+    <div class="popup" id="orderPopup">
+        <button class="close-btn" onclick="closePopup()">✖</button>
+        <h3>📦 Order Details</h3>
+        <p><strong>Tracking ID:</strong> <span id="orderId"></span></p>
+        <p><strong>Domain:</strong> <span id="orderDomain"></span></p>
+        <p><strong>Telegram:</strong> <span id="orderTelegram"></span></p>
+        <p><strong>Status:</strong> <span id="orderStatus"></span></p>
+        <p><strong>Order Placed On:</strong> <span id="orderDate"></span></p>
+        <p><strong>Expected Delivery:</strong> <span id="deliveryDate"></span></p>
+        <p><strong>Order Time:</strong> <span id="orderTime"></span></p>
+    </div>
+
+<!-- Edit Button -->
+<button id="editOrderBtn" class="edit-btn" style="display: none;" onclick="openEditPopup()">✏️ Edit</button>
+
+<!-- Edit Order Popup -->
+<div class="popup" id="editPopup">
+    <button class="close-btn" onclick="closePopup()">✖</button>
+    <h3>✏️ Edit Order Details</h3>
+    <label><strong>Domain:</strong></label>
+    <input type="text" id="editDomain">
+    <label><strong>Telegram:</strong></label>
+    <input type="text" id="editTelegram">
+    <button class="save-btn" onclick="saveEditedOrder()">💾 Save Changes</button>
+</div>
+
+    <div class="popup" id="noticePopup">
+        <button class="close-btn" onclick="closePopup()">✖</button>
+        <h3>📢 Important Notice</h3>
+        <p><strong>📦 Product Details:</strong> The product script file and installation guide will be sent to your Telegram ID.</p>
+        <p><strong>🔑 License Policy:</strong> Your product license is linked to the domain you provided. If the domain is incorrect, the script will <strong>not work</strong>.</p>
+        <p><strong>🔄 License Renewal:</strong> If your domain expires, you must <strong>request a renewal</strong> from the administrator.</p>
+    </div>
+
+<script src="Jquery.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
