@@ -1,0 +1,134 @@
+body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            width: 90%;
+            max-width: 400px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 12px;
+            border: 1px solid #444;
+            background: #222;
+            color: white;
+        }
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            text-align: center;
+        }
+        th { background: #222; }
+        .manage-btn {
+            background: #007aff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .manage-btn:hover { background: #0051cb; }
+        .expand-section {
+            display: none;
+            margin-top: 5px;
+            background: #222;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+        }
+        .action-buttons button {
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .green-btn { background: #28a745; }
+        .green-btn:hover { background: #1f883d; }
+        .orange-btn { background: #ff9500; }
+        .orange-btn:hover { background: #cc7700; }
+        .red-btn { background: #ff3b30; }
+        .red-btn:hover { background: #cc2900; }
+        .delete-btn { background: #d11a2a; }
+        .delete-btn:hover { background: #a31621; }
+        /* Popup Styling */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            display: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .popup h3 { margin: 0 0 10px; }
+        .popup button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #007aff;
+            color: white;
+        }
+        .popup button:hover { background: #0051cb; }
+        
+         .expand-section {
+            
+            padding: 10px;
+            display: none;
+            width: 200px;
+            position: absolute;
+            top: 220px;
+            left: 70px;
+            border-top: 1px solid #ddd;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        .green-btn, .white-btn, .orange-btn, .red-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            color: #111;
+            font-weight: bold;
+            width: 200px;
+            cursor: pointer;
+        }
+        .green-btn { background: rgb(0,255,0); }        
+        .orange-btn { background: #fd7e14; }
+        
+        .white-btn { 
+        background: white;
+        color: rgb(0,0,255); 
+        }
+        
+        .red-btn { background: rgb(200,1,70); }
+        .delete-btn { background: rgb(255,1,50); }
+       
+
