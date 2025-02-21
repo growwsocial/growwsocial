@@ -1,0 +1,105 @@
+body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        input, button {
+            width: 90%;
+            max-width: 400px;
+            padding: 12px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            background: #333;
+            color: white;
+            outline: none;
+        }
+        button {
+            background: #007aff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background: #0051cb; }
+        .order-container {
+            width: 90%;
+            max-width: 400px;
+            background: #222;
+            padding: 12px;
+            margin: 10px auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .order-container:hover { background: #333; }
+        
+        /* Status Colors */
+        .status-inprogress { color: orange; font-weight: bold; }
+        .status-delivered { color: limegreen; font-weight: bold; }
+        .status-rejected { color: red; font-weight: bold; }
+
+        /* Popup Styling */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: none;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            z-index: 1000;
+            display: none;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: red;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn:hover { background: red; }
+
+        /* Notice Button */
+        .notice-btn {
+            position: absolute;
+            top: -3.5mm;
+            right: 0mm;
+            width: 40px;
+            height: 40px;
+            background: #ff9500;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+        }
+        .notice-btn:hover { background: #cc7700; }
